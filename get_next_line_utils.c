@@ -38,29 +38,23 @@ ssize_t	ft_strlen(const char *s)
 
 int	main(int ac, char **av)
 {
-	int		fd;
-	char	*line;
+	int		fd = open(av[1], O_RDONLY);
+	char	*line = get_next_line(fd);
 
-	if (ac != 2)
+	if (ac != 2 || fd == -1)
 	{
 		if (ac < 2)
 			write(2, "File name missing.\n", 19);
 		if (ac > 2)
 			write(2, "Too many arguments.\n", 20);
+		if (fd == -1)
+			write(2, "Cannot open file.\n", 18);
 		return (1);
 	}
-	fd = open(av[1], O_RDONLY);
-	if (fd == -1)
+	while (line != NULL)
 	{
-		write(2, "Cannot open file.\n", 18);
-		return (1);
-	}
-	while (1)
-	{
-		line = get_next_line(fd);
-		if (line == NULL)
-			break ;
 		printf("%s", line);
+		line = get_next_line(fd);
 		free(line);
 		// getchar();
 	}
