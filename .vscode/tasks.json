@@ -1,0 +1,43 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "build",
+        "type": "shell",
+        "command": "gcc",
+        "args": [
+          "-g",
+          "-Wall",
+          "-Werror",
+          "-Wextra",
+          "${workspaceFolder}/get_next_line.c",
+          "${workspaceFolder}/get_next_line_utils.c",
+          "-o",
+          "${workspaceFolder}/a.out"
+        ],
+        "group": {
+          "kind": "build",
+          "isDefault": true
+        },
+        "problemMatcher": ["$gcc"],
+        "detail": "Generated task by Debugger."
+      },
+      {
+        "label": "Run Valgrind",
+        "type": "shell",
+        "command": "valgrind",
+        "args": [
+          "--leak-check=full",
+          "--show-leak-kinds=all",
+          "--track-origins=yes",
+          "${workspaceFolder}/a.out",
+          "41_with_nl"
+        ],
+        "group": {
+          "kind": "test",
+          "isDefault": false
+        },
+        "problemMatcher": []
+      }
+    ]
+  }

@@ -17,6 +17,8 @@ ssize_t	get_new_index(t_gnl *gnl)
 		}
 		index++;
 	}
+	if (gnl->b_read < BUFFER_SIZE)
+		return (index + gnl->next_index);
 	return (-1);
 }
 

@@ -1,6 +1,6 @@
 Pour compiler :
 ```
-gcc -Wall -Wextra -Werror -pedantic get_next_line.c get_next_line_utils.c -D BUFFER_SIZE=XXX
+gcc -Wall -Wextra -Werror get_next_line.c get_next_line_utils.c -D BUFFER_SIZE=XXX
 ```
 Remplacer XXX par la valeur souhaitée (de 1 a 1000000000, sinon le buffer par défaut est de 1)
 

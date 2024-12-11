@@ -69,7 +69,7 @@ char	*create_line(char *line, ssize_t newl_index, t_gnl *gnl)
 	}
 	else
 	{
-		line = malloc((newl_index - gnl->next_index + 1) * sizeof (char));
+		line = malloc((newl_index - gnl->next_index + 2) * sizeof (char));
 		if (!line)
 			return (NULL);
 		ft_strlcpy(gnl->read_buffer + gnl->next_index, line, newl_index - gnl->next_index);
@@ -85,10 +85,10 @@ char	*ft_strjoin(char *s1, char *s2, ssize_t len)
 
 	i = 0;
 	s1_len = ft_strlen(s1);
-	line = malloc((s1_len + len + 1) * sizeof (char));
+	line = malloc((s1_len + len + 2) * sizeof (char));
 	if(!line)
 	{
-	//	free(s1);
+		free(s1);
 		return (NULL);
 	}
 	while (s1[i] != '\0')
@@ -102,7 +102,7 @@ char	*ft_strjoin(char *s1, char *s2, ssize_t len)
 		i++;
 	}
 	line[i] = '\0';
-	//free(s1);
+	free(s1);
 	return (line);
 }
 
