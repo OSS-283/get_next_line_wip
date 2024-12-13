@@ -10,9 +10,6 @@ Run avec :
 ```
 
 Tu peux modifier example.txt a ta guise.
-Le programme fonctionne, dernier pb (rapide) -> si line unique j'ai un call en trop a create_line qui rajoute un caractère en trop...
-Je vais essayer de refaire ma boucle qu'elle sois plus lisible, et regler ce pb en passant.
-
 
 To do :
 
