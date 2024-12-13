@@ -22,6 +22,20 @@ ssize_t	get_new_index(t_gnl *gnl)
 	return (-1);
 }
 
+void	ft_strlcpy(char *src, char *dst, ssize_t dsize)
+{
+	ssize_t	i;
+
+	i = 0;
+	dsize++;
+	while (src[i] && i < dsize)
+	{
+		dst[i] = src[i];
+		i++;
+	}
+	dst[i] = '\0';
+}
+
 ssize_t	ft_strlen(const char *s)
 {
 	ssize_t	i;
@@ -39,7 +53,6 @@ ssize_t	ft_strlen(const char *s)
 int	main(int ac, char **av)
 {
 	int		fd = open(av[1], O_RDONLY);
-	char	*line = get_next_line(fd);
 
 	if (ac != 2 || fd == -1)
 	{
@@ -51,12 +64,13 @@ int	main(int ac, char **av)
 			write(2, "Cannot open file.\n", 18);
 		return (1);
 	}
+	char	*line = get_next_line(fd);
 	while (line != NULL)
 	{
 		printf("%s", line);
-		line = get_next_line(fd);
+		getchar();
 		free(line);
-		// getchar();
+		line = get_next_line(fd);
 	}
 	close(fd);
 	return (0);

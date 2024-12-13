@@ -14,7 +14,7 @@ char	*get_next_line(int fd)
 		if (gnl.next_index >= gnl.b_read)
 		{
 			gnl.b_read = read(fd, gnl.read_buffer, BUFFER_SIZE);
-			if (gnl.b_read <= 0)
+			if (gnl.b_read <= 0 && !line)
 				return (NULL);
 			gnl.next_index = 0;
 		}
@@ -28,7 +28,6 @@ char	*get_next_line(int fd)
 		line = add_buffer_to_line(line, &gnl);
 		gnl.next_index = gnl.b_read;
 	}
-	return (line);
 }
 
 char	*add_buffer_to_line(char *line, t_gnl *gnl)
@@ -40,24 +39,10 @@ char	*add_buffer_to_line(char *line, t_gnl *gnl)
 	}
 	else
 	{
-		line = malloc((gnl->b_read - gnl->next_index + 1) * sizeof (char));
+		line = malloc((gnl->b_read - gnl->next_index + 2) * sizeof (char));
 		ft_strlcpy(gnl->read_buffer + gnl->next_index, line, gnl->b_read - gnl->next_index);
 	}
 	return(line);
-}
-
-void	ft_strlcpy(char *src, char *dst, ssize_t dsize)
-{
-	ssize_t	i;
-
-	i = 0;
-	dsize++;
-	while (src[i] && i < dsize)
-	{
-		dst[i] = src[i];
-		i++;
-	}
-	dst[i] = '\0';
 }
 
 char	*create_line(char *line, ssize_t newl_index, t_gnl *gnl)
@@ -82,7 +67,6 @@ char	*ft_strjoin(char *s1, char *s2, ssize_t len)
 	char		*line;
 	ssize_t		s1_len;
 	ssize_t		i;
-
 	i = 0;
 	s1_len = ft_strlen(s1);
 	line = malloc((s1_len + len + 2) * sizeof (char));
