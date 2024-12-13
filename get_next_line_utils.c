@@ -18,7 +18,7 @@ ssize_t	get_new_index(t_gnl *gnl)
 		index++;
 	}
 	if (gnl->b_read < BUFFER_SIZE)
-		return (index + gnl->next_index);
+		return (index + gnl->next_index -1);
 	return (-1);
 }
 
@@ -50,16 +50,12 @@ ssize_t	ft_strlen(const char *s)
  /*--------------MAIN--------------*/
 /*--------------------------------*/
 
-int	main(int ac, char **av)
+/* int	main(void)
 {
-	int		fd = open(av[1], O_RDONLY);
+	int		fd = open("43_no_nl", O_RDONLY);
 
-	if (ac != 2 || fd == -1)
+	if (fd == -1)
 	{
-		if (ac < 2)
-			write(2, "File name missing.\n", 19);
-		if (ac > 2)
-			write(2, "Too many arguments.\n", 20);
 		if (fd == -1)
 			write(2, "Cannot open file.\n", 18);
 		return (1);
@@ -68,10 +64,10 @@ int	main(int ac, char **av)
 	while (line != NULL)
 	{
 		printf("%s", line);
-		getchar();
+		// getchar();
 		free(line);
 		line = get_next_line(fd);
 	}
 	close(fd);
 	return (0);
-}
+} */

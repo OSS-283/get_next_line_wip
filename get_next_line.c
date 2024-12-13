@@ -21,12 +21,17 @@ char	*get_next_line(int fd)
 		newl_index = get_new_index(&gnl);
 		if (newl_index >= 0 || gnl.b_read < BUFFER_SIZE)
 		{
-			line = create_line(line, newl_index, &gnl);
+			if (gnl.b_read != 0)
+			{
+				// printf("create_line\n");
+				line = create_line(line, newl_index, &gnl);
+			}
 			gnl.next_index = newl_index + 1;
 			return (line);
 		}
 		line = add_buffer_to_line(line, &gnl);
 		gnl.next_index = gnl.b_read;
+		// printf("%s <- line\n", line);
 	}
 }
 
